@@ -24,32 +24,36 @@ public class Person {
         return id;
     }
 
-    public void setId(Integer id) {
+    public Person setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public Person setFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
 
     public String getFamilyName() {
         return familyName;
     }
 
-    public void setFamilyName(String familyName) {
+    public Person setFamilyName(String familyName) {
         this.familyName = familyName;
+        return this;
     }
 
     public Gender getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public Person setGender(Gender gender) {
         this.gender = gender;
+        return this;
     }
 
 
@@ -57,15 +61,17 @@ public class Person {
         return user;
     }
 
-    public void setUser(User user) {
+    public Person setUser(User user) {
         this.user = user;
+        return this;
     }
 
     public List<Course> getCourses() {
         return courses;
     }
 
-    public void setCourses(List<Course> courses) {
+    public Person setCourses(List<Course> courses) {
         this.courses = courses;
+        return this;
     }
 }

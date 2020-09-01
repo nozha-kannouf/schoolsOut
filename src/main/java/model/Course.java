@@ -23,55 +23,62 @@ public class Course {
         return id;
     }
 
-    public void setId(Long id) {
+    public Course setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Course setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Course setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public String getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public Course setCode(String code) {
         this.code = code;
+        return this;
     }
 
     public String getImageURL() {
         return imageURL;
     }
 
-    public void setImageURL(String imageURL) {
+    public Course setImageURL(String imageURL) {
         this.imageURL = imageURL;
+        return this;
     }
 
     public boolean isActive() {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public Course setActive(boolean active) {
         this.active = active;
+        return this;
     }
 
     public List<Module> getModules() {
         return modules;
     }
 
-    public void setModules(List<Module> modules) {
+    public Course setModules(List<Module> modules) {
         this.modules = modules;
+        return this;
     }
 }
