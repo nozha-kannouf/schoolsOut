@@ -9,7 +9,7 @@ public class App {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("datasource");
         EntityManager em = emf.createEntityManager();
 
-        em.close();
-        emf.close();
+            em.close();
+            emf.close();
     }
 }
