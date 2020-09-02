@@ -1,7 +1,16 @@
 package model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(toBuilder = true)
 @Entity
 @Table(name = "user")
 public class User {
@@ -9,42 +18,7 @@ public class User {
     private String login;
     private String passwordHash;
     private boolean active;
-    @OneToOne(mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL)
     private Person person;
 
-    public String getLogin() {
-        return login;
-    }
-
-    public User setLogin(String login) {
-        this.login = login;
-        return this;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public User setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-        return this;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public User setActive(boolean active) {
-        this.active = active;
-        return this;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public User setPerson(Person person) {
-        this.person = person;
-        return this;
-    }
 }

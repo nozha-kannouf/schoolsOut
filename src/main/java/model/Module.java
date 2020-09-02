@@ -1,8 +1,17 @@
 package model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(toBuilder = true)
 @Entity
 @Table(name = "module")
 public class Module {
@@ -12,53 +21,10 @@ public class Module {
     private String name;
     @Lob
     private String description;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "id", nullable = false)
     private Course course;
-    @OneToMany
+    @OneToMany(mappedBy = "module",fetch = FetchType.EAGER, targetEntity = Exam.class, cascade = CascadeType.ALL)
     private List<Exam> exams;
 
-    public Long getId() {
-        return id;
-    }
-
-    public Module setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Module setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Module setDescription(String description) {
-        this.description = description;
-        return this;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public Module setCourse(Course course) {
-        this.course = course;
-        return this;
-    }
-
-    public List<Exam> getExams() {
-        return exams;
-    }
-
-    public Module setExams(List<Exam> exams) {
-        this.exams = exams;
-        return this;
-    }
 }

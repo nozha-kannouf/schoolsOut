@@ -1,8 +1,18 @@
 package model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.List;
 
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(toBuilder = true)
 @Entity
 @Table(name = "course")
 public class Course {
@@ -10,75 +20,14 @@ public class Course {
     @GeneratedValue
     private Long id;
     private String name;
+
+    private boolean active;
+    private String code;
     @Lob
     private String description;
-    private String code;
     @Column(name = "imageurl")
     private String imageURL;
-    private boolean active;
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course", targetEntity = Module.class, cascade = CascadeType.ALL)
     List<Module> modules;
 
-    public Long getId() {
-        return id;
-    }
-
-    public Course setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Course setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Course setDescription(String description) {
-        this.description = description;
-        return this;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public Course setCode(String code) {
-        this.code = code;
-        return this;
-    }
-
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public Course setImageURL(String imageURL) {
-        this.imageURL = imageURL;
-        return this;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public Course setActive(boolean active) {
-        this.active = active;
-        return this;
-    }
-
-    public List<Module> getModules() {
-        return modules;
-    }
-
-    public Course setModules(List<Module> modules) {
-        this.modules = modules;
-        return this;
-    }
 }
