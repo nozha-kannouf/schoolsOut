@@ -1,5 +1,6 @@
 package data;
 
+import com.sun.xml.bind.v2.TODO;
 import model.User;
 
 import javax.persistence.EntityManager;
@@ -9,21 +10,23 @@ import java.util.Optional;
 public class UserCRUDOperations implements CRUDOperations<User> {
 
     @Override
-    public void create(User user) {
+    public Optional<User> create(User user) {
+        //TODO
         EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(user);
         em.getTransaction().commit();
         em.close();
+        return retrieve(user.getLogin());
     }
 
     @Override
-    public Optional<User> retrieve(User user) {
+    public Optional<User> retrieve(Object identity) {
         EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
-        User foundUser = em.find(User.class, user.getLogin());
-        return Optional.of(foundUser);
+        User foundUser = em.find(User.class, identity);
+        return Optional.ofNullable(foundUser);
     }
 
     @Override

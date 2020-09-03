@@ -1,9 +1,6 @@
 package model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,6 +24,7 @@ public class Course {
     @Column(name = "imageurl")
     private String imageURL;
     @OneToMany(mappedBy = "course", targetEntity = Module.class, fetch = FetchType.EAGER)
+    @ToString.Exclude
     List<Module> modules;
 
 }

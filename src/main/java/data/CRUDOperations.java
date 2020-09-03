@@ -3,8 +3,8 @@ package data;
 import java.util.Optional;
 
 public interface CRUDOperations<T> {
-    void create(T t);
-    Optional<T> retrieve(T t);
+    Optional<T> create(T t);
+    Optional<T> retrieve(Object identity);
     T update(T t);
     void delete(T t);
 }

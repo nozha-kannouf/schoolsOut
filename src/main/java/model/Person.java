@@ -26,4 +26,5 @@ public class Person {
 
     @ManyToOne
     private Course course;
+
 }

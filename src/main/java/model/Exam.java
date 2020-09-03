@@ -28,4 +28,5 @@ public class Exam {
     @ManyToOne(targetEntity = model.Module.class, fetch = FetchType.EAGER)
     private Module module;
 
+
 }

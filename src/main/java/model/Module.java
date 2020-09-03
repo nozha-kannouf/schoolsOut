@@ -1,9 +1,6 @@
 package model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,6 +23,7 @@ public class Module {
     private Course course;
 
     @OneToMany(mappedBy = "module",fetch = FetchType.EAGER, targetEntity = Exam.class)
+    @ToString.Exclude
     private List<Exam> exams;
 
 }
