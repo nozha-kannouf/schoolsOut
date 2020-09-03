@@ -4,6 +4,7 @@ import model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.util.Optional;
 
 public class UserCRUDOperations implements CRUDOperations<User> {
 
@@ -18,8 +19,11 @@ public class UserCRUDOperations implements CRUDOperations<User> {
     }
 
     @Override
-    public User retrieve(User user) {
-        return null;
+    public Optional<User> retrieve(User user) {
+        EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
+        EntityManager em = emf.createEntityManager();
+        User foundUser = em.find(User.class, user.getLogin());
+        return Optional.of(foundUser);
     }
 
     @Override

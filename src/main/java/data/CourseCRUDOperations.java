@@ -5,6 +5,7 @@ import model.Course;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.util.Optional;
 
 public class CourseCRUDOperations implements CRUDOperations<Course> {
     @Override
@@ -18,7 +19,7 @@ public class CourseCRUDOperations implements CRUDOperations<Course> {
     }
 
     @Override
-    public Course retrieve(Course course) {
+    public Optional<Course> retrieve(Course course) {
         return null;
     }
 

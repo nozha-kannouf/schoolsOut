@@ -17,7 +17,9 @@ public class App {
 
         Exam exam1= Exam.builder().date(LocalDate.now()).description("description exam1").name("exam1").total(60).weight(30).build();
 
-        Module module1 = Module.builder().description("description module1").name("module1").exams(List.of(exam1)).build();
+        model.Module module1 = new model.Module();
+
+        module1.toBuilder().description("description module1").name("module1").exams(List.of(exam1));
 
         Course course1 = Course.builder().active(true).code("codeCourse1").description("description course1").imageURL("url to course1").name("course1").modules(List.of(module1, module1)).build();
         Course course2 = Course.builder().active(true).code("codeCourse2").description("description course2").imageURL("url to course2").name("course2").modules(List.of(module1)).build();
@@ -33,9 +35,10 @@ public class App {
         moduleCRUD.create(module1);
         courseCRUD.create(course1);
         courseCRUD.create(course2);
-        userCRUD.create(user1);
-        userCRUD.create(user2);
         personCRUD.create(person1);
         personCRUD.create(person2);
+        userCRUD.create(user1);
+        userCRUD.create(user2);
+
     }
 }

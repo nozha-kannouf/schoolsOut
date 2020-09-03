@@ -25,7 +25,7 @@ public class Exam {
     @Lob
     private String description;
 
-    @ManyToOne(targetEntity = Module.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = model.Module.class, fetch = FetchType.EAGER)
     private Module module;
 
 }

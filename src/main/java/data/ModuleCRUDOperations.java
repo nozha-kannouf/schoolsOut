@@ -4,6 +4,7 @@ import model.Module;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.util.Optional;
 
 public class ModuleCRUDOperations implements CRUDOperations<Module> {
     @Override
@@ -17,7 +18,7 @@ public class ModuleCRUDOperations implements CRUDOperations<Module> {
     }
 
     @Override
-    public Module retrieve(Module module) {
+    public Optional<Module> retrieve(Module module) {
         return null;
     }
 

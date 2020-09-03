@@ -26,7 +26,7 @@ public class Course {
     private String description;
     @Column(name = "imageurl")
     private String imageURL;
-    @OneToMany(mappedBy = "course", targetEntity = Module.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "course", targetEntity = Module.class, fetch = FetchType.EAGER)
     List<Module> modules;
 
 }
