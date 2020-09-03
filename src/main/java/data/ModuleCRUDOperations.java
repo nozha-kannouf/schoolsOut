@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class ModuleCRUDOperations implements CRUDOperations<Module> {
     @Override
-    public void create(Module module) {
+    public void create(model.Module module) {
         EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

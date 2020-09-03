@@ -22,7 +22,7 @@ public class Module {
     @Lob
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Course.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Course.class)
     private Course course;
 
     @OneToMany(mappedBy = "module",fetch = FetchType.EAGER, targetEntity = Exam.class)
