@@ -18,7 +18,7 @@ public class User {
     private String login;
     private String passwordHash;
     private boolean active;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Person person;
 
 }

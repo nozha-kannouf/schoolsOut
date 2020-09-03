@@ -1,6 +1,6 @@
 package data;
 
-public interface CRUD<T> {
+public interface CRUDOperations<T> {
     void create(T t);
     T retrieve(T t);
     T update(T t);

@@ -24,7 +24,8 @@ public class Exam {
     private int total;
     @Lob
     private String description;
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne(targetEntity = Module.class, fetch = FetchType.EAGER)
     private Module module;
 
 }

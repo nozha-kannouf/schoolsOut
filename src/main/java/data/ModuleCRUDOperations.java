@@ -1,33 +1,33 @@
 package data;
 
-import model.Person;
+import model.Module;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-public class PersonCRUD implements CRUD<Person> {
+public class ModuleCRUDOperations implements CRUDOperations<Module> {
     @Override
-    public void create(Person person) {
+    public void create(Module module) {
         EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        em.persist(person);
+        em.persist(module);
         em.getTransaction().commit();
         em.close();
     }
 
     @Override
-    public Person retrieve(Person person) {
+    public Module retrieve(Module module) {
         return null;
     }
 
     @Override
-    public Person update(Person person) {
+    public Module update(Module module) {
         return null;
     }
 
     @Override
-    public void delete(Person person) {
+    public void delete(Module module) {
 
     }
 }

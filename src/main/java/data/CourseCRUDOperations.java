@@ -1,33 +1,34 @@
 package data;
 
-import model.Exam;
+import model.Course;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-public class ExamCRUD implements CRUD<Exam> {
+public class CourseCRUDOperations implements CRUDOperations<Course> {
     @Override
-    public void create(Exam exam) {
+    public void create(Course course) {
         EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        em.persist(exam);
+        em.persist(course);
         em.getTransaction().commit();
         em.close();
     }
 
     @Override
-    public Exam retrieve(Exam exam) {
+    public Course retrieve(Course course) {
         return null;
     }
 
     @Override
-    public Exam update(Exam exam) {
+    public Course update(Course course) {
         return null;
     }
 
     @Override
-    public void delete(Exam exam) {
+    public void delete(Course course) {
 
     }
 }

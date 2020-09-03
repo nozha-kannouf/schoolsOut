@@ -20,14 +20,13 @@ public class Course {
     @GeneratedValue
     private Long id;
     private String name;
-
     private boolean active;
     private String code;
     @Lob
     private String description;
     @Column(name = "imageurl")
     private String imageURL;
-    @OneToMany(mappedBy = "course", targetEntity = Module.class, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "course", targetEntity = Module.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Module> modules;
 
 }

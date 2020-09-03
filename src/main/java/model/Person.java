@@ -23,6 +23,7 @@ public class Person {
     private String familyName;
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne
     private Course course;
 }

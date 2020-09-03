@@ -5,7 +5,7 @@ import model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-public class UserCRUD implements CRUD<User>{
+public class UserCRUDOperations implements CRUDOperations<User> {
 
     @Override
     public void create(User user) {

@@ -21,10 +21,11 @@ public class Module {
     private String name;
     @Lob
     private String description;
-    @ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "id", nullable = false)
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Course.class)
     private Course course;
-    @OneToMany(mappedBy = "module",fetch = FetchType.EAGER, targetEntity = Exam.class, cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "module",fetch = FetchType.EAGER, targetEntity = Exam.class)
     private List<Exam> exams;
 
 }

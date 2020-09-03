@@ -9,11 +9,11 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) {
-        UserCRUD userCRUD = new UserCRUD();
-        PersonCRUD personCRUD = new PersonCRUD();
-        CourseCRUD courseCRUD = new CourseCRUD();
-        ModuleCRUD moduleCRUD = new ModuleCRUD();
-        ExamCRUD examCRUD = new ExamCRUD();
+        UserCRUDOperations userCRUD = new UserCRUDOperations();
+        PersonCRUDOperations personCRUD = new PersonCRUDOperations();
+        CourseCRUDOperations courseCRUD = new CourseCRUDOperations();
+        ModuleCRUDOperations moduleCRUD = new ModuleCRUDOperations();
+        ExamCRUDOperations examCRUD = new ExamCRUDOperations();
 
         Exam exam1= Exam.builder().date(LocalDate.now()).description("description exam1").name("exam1").total(60).weight(30).build();
 
@@ -28,6 +28,7 @@ public class App {
         User user1 = User.builder().login("login3").passwordHash("password1").active(true).person(person1).build();
         User user2 = User.builder().login("login4").passwordHash("password2").active(true).person(person2).build();
 
+
         examCRUD.create(exam1);
         moduleCRUD.create(module1);
         courseCRUD.create(course1);
@@ -36,8 +37,5 @@ public class App {
         userCRUD.create(user2);
         personCRUD.create(person1);
         personCRUD.create(person2);
-
-
-
     }
 }
