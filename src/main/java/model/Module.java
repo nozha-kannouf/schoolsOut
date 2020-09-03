@@ -19,10 +19,10 @@ public class Module {
     @Lob
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Course.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Course.class, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
     private Course course;
 
-    @OneToMany(mappedBy = "module",fetch = FetchType.EAGER, targetEntity = Exam.class)
+    @OneToMany(mappedBy = "module",fetch = FetchType.EAGER, targetEntity = Exam.class, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
     @ToString.Exclude
     private List<Exam> exams;
 

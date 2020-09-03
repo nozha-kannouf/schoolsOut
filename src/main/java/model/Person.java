@@ -24,7 +24,7 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE,CascadeType.MERGE}, targetEntity = Course.class)
     private Course course;
 
 }

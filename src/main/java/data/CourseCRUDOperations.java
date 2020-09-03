@@ -1,7 +1,7 @@
 package data;
 
 import model.Course;
-import model.Exam;
+import model.Module;
 
 
 import javax.persistence.EntityManager;
@@ -34,7 +34,22 @@ public class CourseCRUDOperations implements CRUDOperations<Course> {
     }
 
     @Override
-    public void delete(Course course) {
+    public boolean delete(Course course) {
+        boolean courseExists = retrieve(course.getId()).isPresent();
+        EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        if(courseExists){
 
+            em.remove(em.find(Course.class, course.getId()));
+            em.getTransaction().commit();
+            em.close();
+            System.out.println("course deleted with success");
+            return true;
+        }
+        else{
+            System.out.println("This course don't exist in the DB");
+            return false;
+        }
     }
 }

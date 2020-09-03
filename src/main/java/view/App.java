@@ -16,7 +16,30 @@ public class App {
 
         //createTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
 
-        retrieveTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
+        //retrieveTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
+
+        deleteTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
+
+    }
+
+    private static void deleteTest(UserCRUDOperations userCRUD, PersonCRUDOperations personCRUD, CourseCRUDOperations courseCRUD, ModuleCRUDOperations moduleCRUD, ExamCRUDOperations examCRUD) {
+        Course course1 = Course.builder().id(61L).active(true).code("INFO248").description("description course1").imageURL("url to course1").name("Algorithme").build();
+        Course course2 = Course.builder().active(true).code("INFO56").description("description course2").imageURL("url to course2").name("Réseaux Informatique").build();
+
+        model.Module module1 = Module.builder().id(27L).course(course2).description("xxxx").name("Securité Informatique").build();
+
+        Exam exam1= Exam.builder().id(28L).module(module1).date(LocalDate.now()).description("description exam1").name("exam1").total(60).weight(30).build();
+
+
+        Person person1 = Person.builder().id(59).familyName("Geudens").firstName("Patrick").gender(Gender.MALE).course(course1).build();
+
+        User user1 = User.builder().login("login18").passwordHash("password2").active(true).person(person1).build();
+
+        //userCRUD.delete(user1);//ok
+        //personCRUD.delete(person1);//ok
+       // moduleCRUD.delete(module1);//ok
+        //courseCRUD.delete(course1); //oK
+        examCRUD.delete(exam1);
 
     }
 
@@ -25,19 +48,18 @@ public class App {
                                    ModuleCRUDOperations moduleCRUD, ExamCRUDOperations examCRUD){
         //Test of create operations
 
+        Course course1 = Course.builder().active(true).code("INFO248").description("description course1").imageURL("url to course1").name("Algorithme").build();
+        Course course2 = Course.builder().active(true).code("INFO56").description("description course2").imageURL("url to course2").name("Réseaux Informatique").build();
 
-        Course course1 = Course.builder().active(true).code("codeCourse1").description("description course1").imageURL("url to course1").name("course1").build();
-        Course course2 = Course.builder().active(true).code("codeCourse2").description("description course2").imageURL("url to course2").name("course2").build();
-
-        model.Module module1 = Module.builder().course(course1).description("description module1").name("module1").build();
+        model.Module module1 = Module.builder().course(course1).description("description module").name("Informatique").build();
 
         Exam exam1= Exam.builder().module(module1).date(LocalDate.now()).description("description exam1").name("exam1").total(60).weight(30).build();
 
 
-        Person person1 = Person.builder().familyName("kannouf").firstName("Nozha").gender(Gender.FEMALE).course(course1).build();
-        Person person2 = Person.builder().familyName("Lahri").firstName("amine").gender(Gender.MALE).course(course2).build();
+        Person person1 = Person.builder().familyName("Geudens").firstName("Patrick").gender(Gender.MALE).course(course1).build();
+        Person person2 = Person.builder().familyName("DS").firstName("Pearl").gender(Gender.FEMALE).course(course2).build();
 
-        User user1 = User.builder().login("login19").passwordHash("password1").active(true).person(person1).build();
+        User user1 = User.builder().login("login20").passwordHash("password1").active(true).person(person1).build();
 
         courseCRUD.create(course1).ifPresentOrElse(
                                                     course -> System.out.println("The course is registered..!"),

@@ -33,7 +33,22 @@ public class PersonCRUDOperations implements CRUDOperations<Person> {
     }
 
     @Override
-    public void delete(Person person) {
+    public boolean delete(Person person) {
+        EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
 
+        boolean personExists = retrieve(person.getId()).isPresent();
+        if(personExists){
+            em.remove(em.contains(person) ? person : em.merge(person));
+            em.getTransaction().commit();
+            em.close();
+            System.out.println("person deleted with success");
+            return true;
+        }
+        else{
+            System.out.println("This person don't exist in the DB");
+            return false;
+        }
     }
 }
