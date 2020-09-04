@@ -2,6 +2,7 @@ package data;
 
 import model.Course;
 import model.Module;
+import model.Person;
 
 
 import javax.persistence.EntityManager;
@@ -40,8 +41,19 @@ public class CourseCRUDOperations implements CRUDOperations<Course> {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         if(courseExists){
+            em.createQuery("UPDATE Person p SET p.course = :course_id WHERE p.id = :val ")
+
+                    .setParameter("course_id", null)
+                    .setParameter("val", course.getId().intValue())
+                    .executeUpdate();
+//
+//            em.createQuery("UPDATE Module m SET m.course =:course_id WHERE m.id = :val ")
+//                    .setParameter("course_id", null)
+//                    .setParameter("val", course.getId()).executeUpdate();
+
 
             em.remove(em.find(Course.class, course.getId()));
+
             em.getTransaction().commit();
             em.close();
             System.out.println("course deleted with success");

@@ -1,6 +1,7 @@
 package data;
 
 import model.Module;
+import model.Person;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -26,6 +27,10 @@ public class ModuleCRUDOperations implements CRUDOperations<Module> {
         return Optional.ofNullable(foundModule);
     }
 
+    private Optional<Module> retrieve(Object identity, EntityManager em) {
+        Module foundModule = em.find(Module.class, identity);
+        return Optional.ofNullable(foundModule);
+    }
     @Override
     public Module update(Module module) {
 //        EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
@@ -48,17 +53,20 @@ public class ModuleCRUDOperations implements CRUDOperations<Module> {
     }
 
     @Override
-    public boolean delete(Module module) {
-        boolean moduleExists = retrieve(module.getId()).isPresent();
+    public boolean delete(model.Module module) {
         EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        if(moduleExists){
 
-            em.remove(em.find(Module.class, module.getId()));
+        Optional<model.Module> moduleExists = retrieve(module.getId(),em);
+
+        if(moduleExists.isPresent()){
+
+            em.remove(em.find(model.Module.class, module.getId()));
+
             em.getTransaction().commit();
             em.close();
-            System.out.println("module deleted with success");
+            System.out.println("The module deleted with success");
             return true;
         }
         else{

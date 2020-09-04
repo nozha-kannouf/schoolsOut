@@ -23,23 +23,22 @@ public class App {
     }
 
     private static void deleteTest(UserCRUDOperations userCRUD, PersonCRUDOperations personCRUD, CourseCRUDOperations courseCRUD, ModuleCRUDOperations moduleCRUD, ExamCRUDOperations examCRUD) {
-        Course course1 = Course.builder().id(61L).active(true).code("INFO248").description("description course1").imageURL("url to course1").name("Algorithme").build();
-        Course course2 = Course.builder().active(true).code("INFO56").description("description course2").imageURL("url to course2").name("Réseaux Informatique").build();
+        Course course1 = Course.builder().id(31L).active(true).code("INFO248").description("description course1").imageURL("url to course1").name("Algorithme").build();
 
-        model.Module module1 = Module.builder().id(27L).course(course2).description("xxxx").name("Securité Informatique").build();
+        model.Module module1 = Module.builder().id(33L).course(course1).description("xxxx").name("Securité Informatique").build();
 
-        Exam exam1= Exam.builder().id(28L).module(module1).date(LocalDate.now()).description("description exam1").name("exam1").total(60).weight(30).build();
+        Exam exam1= Exam.builder().id(34L).module(module1).date(LocalDate.now()).description("description exam1").name("exam1").total(60).weight(30).build();
 
 
-        Person person1 = Person.builder().id(59).familyName("Geudens").firstName("Patrick").gender(Gender.MALE).course(course1).build();
+        Person person1 = Person.builder().id(18).course(course1).familyName("Geudens").firstName("Patrick").gender(Gender.MALE).build();
 
-        User user1 = User.builder().login("login18").passwordHash("password2").active(true).person(person1).build();
+        User user1 = User.builder().login("login12").passwordHash("password2").person(person1).active(true).build();
 
         //userCRUD.delete(user1);//ok
         //personCRUD.delete(person1);//ok
-       // moduleCRUD.delete(module1);//ok
-        //courseCRUD.delete(course1); //oK
-        examCRUD.delete(exam1);
+        //moduleCRUD.delete(module1);// ok
+        courseCRUD.delete(course1); //NOT oK
+       //examCRUD.delete(exam1);// NOT OK
 
     }
 

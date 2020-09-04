@@ -1,6 +1,7 @@
 package data;
 
 import model.Person;
+import model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -38,9 +39,9 @@ public class PersonCRUDOperations implements CRUDOperations<Person> {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
-        boolean personExists = retrieve(person.getId()).isPresent();
-        if(personExists){
-            em.remove(em.contains(person) ? person : em.merge(person));
+        Optional<Person> personExists = retrieve(person.getId());
+       if(personExists.isPresent()){
+            em.remove(personExists.get());
             em.getTransaction().commit();
             em.close();
             System.out.println("person deleted with success");

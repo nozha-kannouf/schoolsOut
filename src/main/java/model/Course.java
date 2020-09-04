@@ -23,8 +23,16 @@ public class Course {
     private String description;
     @Column(name = "imageurl")
     private String imageURL;
-    @OneToMany(mappedBy = "course", targetEntity = Module.class, fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+    @OneToMany(mappedBy = "course",
+               orphanRemoval = true,
+               targetEntity = Module.class,
+               fetch = FetchType.EAGER,
+               cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+
     @ToString.Exclude
     List<Module> modules;
+
+
+
 
 }

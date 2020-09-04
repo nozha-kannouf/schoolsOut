@@ -36,13 +36,14 @@ public class UserCRUDOperations implements CRUDOperations<User> {
 
     @Override
     public boolean delete(User user) {
+
         EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
-        boolean userExists = retrieve(user.getLogin()).isPresent();
-        if(userExists){
-            em.remove(em.contains(user) ? user : em.merge(user));
+        Optional<User> userExists = retrieve(user.getLogin());
+        if(userExists.isPresent()){
+            em.remove(em.contains(userExists.get()) ? userExists.get() : em.merge(userExists.get()));
             em.getTransaction().commit();
             em.close();
             System.out.println("User deleted with success");

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -24,7 +26,10 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE,CascadeType.MERGE}, targetEntity = Course.class)
+    @ManyToOne(fetch = FetchType.EAGER,
+            targetEntity = Course.class,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE,CascadeType.MERGE})
+    @JoinColumn(name = "course_id")
     private Course course;
 
 }
