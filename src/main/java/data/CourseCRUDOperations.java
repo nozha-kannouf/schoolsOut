@@ -1,16 +1,10 @@
 package data;
 
 import model.Course;
-import model.Module;
-import model.Person;
-
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class CourseCRUDOperations implements CRUDOperations<Course> {
     @Override
@@ -56,24 +50,15 @@ public class CourseCRUDOperations implements CRUDOperations<Course> {
 
     @Override
     public boolean delete(Course course) {
-        boolean courseExists = retrieve(course.getId()).isPresent();
         EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        if(courseExists){
-            em.createQuery("UPDATE Person p SET p.course = :course_id WHERE p.id = :val ")
-
-                    .setParameter("course_id", null)
-                    .setParameter("val", course.getId().intValue())
-                    .executeUpdate();
-//
-//            em.createQuery("UPDATE Module m SET m.course =:course_id WHERE m.id = :val ")
-//                    .setParameter("course_id", null)
-//                    .setParameter("val", course.getId()).executeUpdate();
-
-
+        if(em.find(Course.class, course.getId())!= null){
+            em.createQuery("UPDATE Person p SET p.course = ?1 WHERE p.course = ?2")
+               .setParameter(1, null)
+               .setParameter(2, course)
+               .executeUpdate();
             em.remove(em.find(Course.class, course.getId()));
-
             em.getTransaction().commit();
             em.close();
             System.out.println("course deleted with success");

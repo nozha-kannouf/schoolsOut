@@ -3,9 +3,8 @@ package view;
 import data.*;
 import model.*;
 import model.Module;
-
 import java.time.LocalDate;
-import java.util.List;
+
 
 public class App {
     public static void main(String[] args) {
@@ -19,9 +18,9 @@ public class App {
 
         //retrieveTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
 
-        //deleteTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
+        deleteTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
 
-        updateTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
+        //updateTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
 
     }
 
@@ -44,21 +43,21 @@ public class App {
     }
 
     private static void deleteTest(UserCRUDOperations userCRUD, PersonCRUDOperations personCRUD, CourseCRUDOperations courseCRUD, ModuleCRUDOperations moduleCRUD, ExamCRUDOperations examCRUD) {
-        Course course1 = Course.builder().id(31L).active(true).code("INFO248").description("description course1").imageURL("url to course1").name("Algorithme").build();
+        Course course = Course.builder().id(25L).active(true).code("INFO248").description("description course1").imageURL("url to course1").name("Algorithme").build();
 
-        model.Module module1 = Module.builder().id(33L).course(course1).description("xxxx").name("Securité Informatique").build();
+        model.Module module1 = Module.builder().id(27L).course(course).description("xxxx").name("Securité Informatique").build();
 
-        Exam exam1= Exam.builder().id(34L).module(module1).date(LocalDate.now()).description("description exam1").name("exam1").total(60).weight(30).build();
+        Exam exam1= Exam.builder().id(52L).module(module1).date(LocalDate.now()).description("description exam1").name("exam1").total(60).weight(30).build();
 
-        Person person1 = Person.builder().id(18).course(course1).familyName("Geudens").firstName("Patrick").gender(Gender.MALE).build();
+        Person person1 = Person.builder().id(18).course(course).familyName("Geudens").firstName("Patrick").gender(Gender.MALE).build();
 
         User user1 = User.builder().login("login12").passwordHash("password2").person(person1).active(true).build();
 
         //userCRUD.delete(user1);//ok
         //personCRUD.delete(person1);//ok
         //moduleCRUD.delete(module1);// ok
-        //courseCRUD.delete(course1); //NOT oK
-       //examCRUD.delete(exam1);// NOT OK
+        //courseCRUD.delete(course); // oK
+       //examCRUD.delete(exam1);// OK
 
     }
 

@@ -1,7 +1,6 @@
 package data;
 
 import model.Exam;
-import model.Module;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -60,7 +59,6 @@ public class ExamCRUDOperations implements CRUDOperations<Exam> {
         Optional<Exam> examExists = retrieve(exam.getId(),em);
 
         if(examExists.isPresent()){
-
             em.remove(em.find(Exam.class, exam.getId()));
 
             em.getTransaction().commit();

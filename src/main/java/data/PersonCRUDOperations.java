@@ -1,9 +1,6 @@
 package data;
 
-import model.Course;
 import model.Person;
-import model.User;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.Optional;

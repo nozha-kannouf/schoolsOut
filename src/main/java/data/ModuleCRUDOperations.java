@@ -1,7 +1,6 @@
 package data;
 
 import model.Module;
-import model.Person;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
