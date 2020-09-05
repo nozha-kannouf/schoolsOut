@@ -1,11 +1,9 @@
 package model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -28,6 +26,12 @@ public class Person {
             targetEntity = Course.class,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "course_id")
-    private Course course;
+    private Course courseActive;
 
+    @ManyToMany
+    @JoinTable(name = "person_course",
+                joinColumns = @JoinColumn(name = "person_id"),
+                inverseJoinColumns = @JoinColumn(name = "course_id")
+                )
+    private List<Course> courseHistory;
 }

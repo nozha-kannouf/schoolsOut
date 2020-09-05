@@ -1,12 +1,10 @@
 package model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -31,5 +29,17 @@ public class Exam {
     @JoinColumn(name = "module_id")
     private Module module;
 
+    @ManyToOne(targetEntity = Exam.class,
+            fetch = FetchType.EAGER,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+    @JoinColumn(name = "examGroup_id", referencedColumnName = "id")
+    private Exam examGroup;
+
+    @OneToMany(mappedBy = "examGroup",
+            fetch = FetchType.EAGER,
+            targetEntity = Exam.class,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+    @ToString.Exclude
+    private List<Exam> subExams;
 
 }

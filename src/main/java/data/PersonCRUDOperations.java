@@ -35,15 +35,15 @@ public class PersonCRUDOperations implements CRUDOperations<Person> {
             personToUpdate.setFirstName(person.getFirstName());
             personToUpdate.setFamilyName(person.getFamilyName());
             personToUpdate.setGender(person.getGender());
-            personToUpdate.setCourse(person.getCourse());
+            personToUpdate.setCourseActive(person.getCourseActive());
 
             em.getTransaction().begin();
-            em.merge( person.getCourse() );
+            em.merge(person.getCourseActive());
             em.merge(personToUpdate);
             em.getTransaction().commit();
             em.close();
-            System.out.println("User updated with success");
-        }else System.out.println("user not updated");
+            System.out.println("Person updated with success");
+        }else System.out.println("Person not updated");
 
         return Optional.ofNullable(personToUpdate);
     }

@@ -6,7 +6,7 @@ import model.Module;
 import java.time.LocalDate;
 
 
-public class App {
+public class Dee_1_App {
     public static void main(String[] args) {
         UserCRUDOperations userCRUD = new UserCRUDOperations();
         PersonCRUDOperations personCRUD = new PersonCRUDOperations();
@@ -18,7 +18,7 @@ public class App {
 
         //retrieveTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
 
-        deleteTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
+        //deleteTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
 
         //updateTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
 
@@ -49,7 +49,7 @@ public class App {
 
         Exam exam1= Exam.builder().id(52L).module(module1).date(LocalDate.now()).description("description exam1").name("exam1").total(60).weight(30).build();
 
-        Person person1 = Person.builder().id(18).course(course).familyName("Geudens").firstName("Patrick").gender(Gender.MALE).build();
+        Person person1 = Person.builder().id(18).courseActive(course).familyName("Geudens").firstName("Patrick").gender(Gender.MALE).build();
 
         User user1 = User.builder().login("login12").passwordHash("password2").person(person1).active(true).build();
 
@@ -74,8 +74,8 @@ public class App {
         Exam exam1= Exam.builder().module(module1).date(LocalDate.now()).description("description exam1").name("exam1").total(60).weight(30).build();
 
 
-        Person person1 = Person.builder().familyName("Geudens").firstName("Patrick").gender(Gender.MALE).course(course1).build();
-        Person person2 = Person.builder().familyName("DS").firstName("Pearl").gender(Gender.FEMALE).course(course2).build();
+        Person person1 = Person.builder().familyName("Geudens").firstName("Patrick").gender(Gender.MALE).courseActive(course1).build();
+        Person person2 = Person.builder().familyName("DS").firstName("Pearl").gender(Gender.FEMALE).courseActive(course2).build();
 
         User user1 = User.builder().login("login20").passwordHash("password1").active(true).person(person1).build();
 
