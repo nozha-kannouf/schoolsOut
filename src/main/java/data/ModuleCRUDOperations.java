@@ -32,24 +32,25 @@ public class ModuleCRUDOperations implements CRUDOperations<Module> {
         return Optional.ofNullable(foundModule);
     }
     @Override
-    public Module update(Module module) {
-//        EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
-//        EntityManager em = emf.createEntityManager();
-//        em.getTransaction().begin();
-//
-//        boolean moduleExists = retrieve(module.getId()).isPresent();
-//        if(moduleExists){
-//            em.remove(em.contains(module) ? module : em.merge(module));
-//            em.getTransaction().commit();
-//            em.close();
-//            System.out.println("module updated with success");
-//            return true;
-//        }
-//        else{
-//            System.out.println("This module is notupdated");
-//            return false;
-//        }
-        return null;
+    public Optional<Module> update(Module module) {
+        EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
+        EntityManager em = emf.createEntityManager();
+        Module moduleToUpdate = em.find(Module.class, module.getId());
+        if(moduleToUpdate!= null){
+            moduleToUpdate.setDescription(module.getDescription());
+            moduleToUpdate.setName(module.getName());
+            moduleToUpdate.setCourse(module.getCourse());
+            moduleToUpdate.setCourse(moduleToUpdate.getCourse());
+
+            em.getTransaction().begin();
+            em.merge( moduleToUpdate.getCourse() );
+            em.merge(moduleToUpdate);
+            em.getTransaction().commit();
+            em.close();
+            System.out.println("Module updated with success");
+        }else System.out.println("Module not updated");
+
+        return Optional.ofNullable(moduleToUpdate);
     }
 
     @Override

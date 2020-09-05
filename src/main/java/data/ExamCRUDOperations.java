@@ -1,6 +1,5 @@
 package data;
 
-import model.Course;
 import model.Exam;
 import model.Module;
 
@@ -29,8 +28,27 @@ public class ExamCRUDOperations implements CRUDOperations<Exam> {
     }
 
     @Override
-    public Exam update(Exam exam) {
-        return null;
+    public Optional<Exam> update(Exam exam) {
+
+        EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
+        EntityManager em = emf.createEntityManager();
+        Exam examToUpdate = em.find(Exam.class, exam.getId());
+        if(examToUpdate!= null){
+            examToUpdate.setDescription(exam.getDescription());
+            examToUpdate.setName(exam.getName());
+            examToUpdate.setDate(exam.getDate());
+            examToUpdate.setModule(exam.getModule());
+            examToUpdate.setTotal(exam.getTotal());
+            examToUpdate.setWeight(exam.getWeight());
+            em.getTransaction().begin();
+
+            em.merge(examToUpdate);
+            em.getTransaction().commit();
+            em.close();
+            System.out.println("Exam updated with success");
+        }else System.out.println("Exam not updated");
+
+        return Optional.ofNullable(examToUpdate);
     }
 
     @Override

@@ -27,7 +27,7 @@ public class Exam {
 
     @ManyToOne(targetEntity = model.Module.class,
                fetch = FetchType.EAGER,
-               cascade = {CascadeType.PERSIST, CascadeType.REMOVE,CascadeType.MERGE})
+               cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
     @JoinColumn(name = "module_id")
     private Module module;
 

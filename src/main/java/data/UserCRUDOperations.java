@@ -10,7 +10,6 @@ public class UserCRUDOperations implements CRUDOperations<User> {
 
     @Override
     public Optional<User> create(User user) {
-        //TODO
         EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -30,8 +29,21 @@ public class UserCRUDOperations implements CRUDOperations<User> {
     }
 
     @Override
-    public User update(User user) {
-        return null;
+    public Optional<User> update(User user) {
+        EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
+        EntityManager em = emf.createEntityManager();
+        User userToUpdate = em.find(User.class, user.getLogin());
+        if(userToUpdate!= null){
+            userToUpdate.setActive(user.isActive());
+            userToUpdate.setPasswordHash(user.getPasswordHash());
+            em.getTransaction().begin();
+            em.merge(userToUpdate);
+            em.getTransaction().commit();
+            em.close();
+            System.out.println("User updated with success");
+        }else System.out.println("user not updated");
+
+        return Optional.ofNullable(userToUpdate);
     }
 
     @Override

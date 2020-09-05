@@ -5,6 +5,7 @@ import model.*;
 import model.Module;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class App {
     public static void main(String[] args) {
@@ -18,8 +19,28 @@ public class App {
 
         //retrieveTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
 
-        deleteTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
+        //deleteTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
 
+        updateTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
+
+    }
+
+    private static void updateTest(UserCRUDOperations userCRUD, PersonCRUDOperations personCRUD, CourseCRUDOperations courseCRUD, ModuleCRUDOperations moduleCRUD, ExamCRUDOperations examCRUD) {
+        User user = User.builder().login("login17").passwordHash("passwordUpdated").active(true).build();
+       // Person person = Person.builder().id(12).familyName("lahriUpdated").gender(Gender.MALE).firstName("amineUpdated").course(course).build();
+        Module module2 = Module.builder().id(15L).build();
+        Course course = Course.builder().id(19L).active(true).code("INFO248Updated").description("description course1 updated").imageURL("url to course1").name("Algorithme Updated").build();
+        Module module1 = Module.builder().id(7L).description("module updated").course(course).build();
+        Exam exam= Exam.builder().id(1L).module(module1).date(LocalDate.now()).description("description exam1 updated").name("exam1 updated").total(60).weight(30).build();
+
+
+
+
+        //userCRUD.update(user);//ok
+        //personCRUD.update(person);//ok
+        //courseCRUD.update(course);//ok
+        //moduleCRUD.update(module1);//ok
+        //examCRUD.update(exam);//ok
     }
 
     private static void deleteTest(UserCRUDOperations userCRUD, PersonCRUDOperations personCRUD, CourseCRUDOperations courseCRUD, ModuleCRUDOperations moduleCRUD, ExamCRUDOperations examCRUD) {
@@ -29,7 +50,6 @@ public class App {
 
         Exam exam1= Exam.builder().id(34L).module(module1).date(LocalDate.now()).description("description exam1").name("exam1").total(60).weight(30).build();
 
-
         Person person1 = Person.builder().id(18).course(course1).familyName("Geudens").firstName("Patrick").gender(Gender.MALE).build();
 
         User user1 = User.builder().login("login12").passwordHash("password2").person(person1).active(true).build();
@@ -37,7 +57,7 @@ public class App {
         //userCRUD.delete(user1);//ok
         //personCRUD.delete(person1);//ok
         //moduleCRUD.delete(module1);// ok
-        courseCRUD.delete(course1); //NOT oK
+        //courseCRUD.delete(course1); //NOT oK
        //examCRUD.delete(exam1);// NOT OK
 
     }

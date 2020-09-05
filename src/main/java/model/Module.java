@@ -21,12 +21,11 @@ public class Module {
 
     @ManyToOne(fetch = FetchType.EAGER,
                targetEntity = Course.class,
-               cascade = {CascadeType.PERSIST, CascadeType.REMOVE,CascadeType.MERGE})
+               cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
     @JoinColumn(name = "course_id")
     private Course course;
 
     @OneToMany(mappedBy = "module",
-               orphanRemoval = true,
                fetch = FetchType.EAGER,
                targetEntity = Exam.class,
                cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})

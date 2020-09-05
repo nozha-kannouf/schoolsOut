@@ -1,5 +1,6 @@
 package data;
 
+import model.Course;
 import model.Person;
 import model.User;
 
@@ -29,8 +30,25 @@ public class PersonCRUDOperations implements CRUDOperations<Person> {
     }
 
     @Override
-    public Person update(Person person) {
-        return null;
+    public Optional<Person> update(Person person) {
+        EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
+        EntityManager em = emf.createEntityManager();
+        Person personToUpdate = em.find(Person.class, person.getId());
+        if(personToUpdate!= null){
+            personToUpdate.setFirstName(person.getFirstName());
+            personToUpdate.setFamilyName(person.getFamilyName());
+            personToUpdate.setGender(person.getGender());
+            personToUpdate.setCourse(person.getCourse());
+
+            em.getTransaction().begin();
+            em.merge( person.getCourse() );
+            em.merge(personToUpdate);
+            em.getTransaction().commit();
+            em.close();
+            System.out.println("User updated with success");
+        }else System.out.println("user not updated");
+
+        return Optional.ofNullable(personToUpdate);
     }
 
     @Override
