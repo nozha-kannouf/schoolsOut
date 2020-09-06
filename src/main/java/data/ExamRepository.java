@@ -4,9 +4,17 @@ import model.Exam;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.util.List;
 import java.util.Optional;
 
-public class ExamCRUDOperations implements CRUDOperations<Exam> {
+public class ExamRepository implements CRUDOperations<Exam> {
+    public List<Exam> getSubExams(Long id){
+        EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
+        EntityManager em = emf.createEntityManager();
+        return em.createQuery("SELECT e from Exam e WHERE e.examGroup.id=?1",Exam.class)
+                 .setParameter(1, id)
+                 .getResultList();
+    }
     @Override
     public Optional<Exam> create(Exam exam) {
         EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
@@ -59,6 +67,10 @@ public class ExamCRUDOperations implements CRUDOperations<Exam> {
         Optional<Exam> examExists = retrieve(exam.getId(),em);
 
         if(examExists.isPresent()){
+            em.createQuery("UPDATE Grade g SET g.exam = ?1 WHERE g.exam = ?2")
+                    .setParameter(1, null)
+                    .setParameter(2, exam)
+                    .executeUpdate();
             em.remove(em.find(Exam.class, exam.getId()));
 
             em.getTransaction().commit();

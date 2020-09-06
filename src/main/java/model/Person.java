@@ -24,7 +24,7 @@ public class Person {
 
     @ManyToOne(fetch = FetchType.EAGER,
             targetEntity = Course.class,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+            cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "course_id")
     private Course courseActive;
 

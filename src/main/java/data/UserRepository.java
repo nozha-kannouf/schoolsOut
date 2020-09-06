@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.Optional;
 
-public class UserCRUDOperations implements CRUDOperations<User> {
+public class UserRepository implements CRUDOperations<User> {
 
     @Override
     public Optional<User> create(User user) {

@@ -19,21 +19,24 @@ public class Grade {
     @Id
     @GeneratedValue
     private Long id;
-    @ManyToOne(fetch = FetchType.EAGER,
-               targetEntity = Person.class,
-               cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name = "person_id")
-    private Person person;
-    @ManyToOne(fetch = FetchType.EAGER,
-               targetEntity = Exam.class,
-               cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    @JoinColumn(name = "exam_id")
-    private Exam exam;
     private BigDecimal gradeValue;
     private String Comment;
     private String internalComment;
     private boolean absent;
     private boolean postponed;
     private LocalDate date;
+
+    @ManyToOne(fetch = FetchType.EAGER,
+               targetEntity = Person.class,
+               cascade = {CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = "person_id")
+    private Person person;
+
+    @ManyToOne(fetch = FetchType.EAGER,
+               targetEntity = Exam.class,
+               cascade = {CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = "exam_id")
+    private Exam exam;
+
 
 }

@@ -5,7 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.Optional;
 
-public class PersonCRUDOperations implements CRUDOperations<Person> {
+public class PersonRepository implements CRUDOperations<Person> {
     @Override
     public Optional<Person> create(Person person) {
         EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();

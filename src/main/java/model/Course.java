@@ -26,7 +26,7 @@ public class Course {
     @OneToMany(mappedBy = "course",
                targetEntity = Module.class,
                fetch = FetchType.EAGER,
-               cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+               cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     @ToString.Exclude
     List<Module> modules;
 

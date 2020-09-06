@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.Optional;
 
-public class CourseCRUDOperations implements CRUDOperations<Course> {
+public class CourseRepository implements CRUDOperations<Course> {
     @Override
     public Optional<Course> create(Course course) {
         EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();

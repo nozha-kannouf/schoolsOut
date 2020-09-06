@@ -25,20 +25,21 @@ public class Exam {
 
     @ManyToOne(targetEntity = model.Module.class,
                fetch = FetchType.EAGER,
-               cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+               cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     @JoinColumn(name = "module_id")
     private Module module;
 
     @ManyToOne(targetEntity = Exam.class,
             fetch = FetchType.EAGER,
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+            cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     @JoinColumn(name = "examGroup_id", referencedColumnName = "id")
+    @ToString.Exclude
     private Exam examGroup;
 
     @OneToMany(mappedBy = "examGroup",
             fetch = FetchType.EAGER,
             targetEntity = Exam.class,
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+            cascade = {CascadeType.REMOVE, CascadeType.MERGE})
     @ToString.Exclude
     private List<Exam> subExams;
 

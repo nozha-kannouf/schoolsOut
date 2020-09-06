@@ -1,10 +1,16 @@
 package service;
 
-import data.ExamCRUDOperations;
+import data.ExamRepository;
+import data.GradeRepository;
 
 public class ExamService {
-    ExamCRUDOperations examCRUD = new ExamCRUDOperations();
+    ExamRepository examCRUD = new ExamRepository();
+    GradeRepository gradeRepo = new GradeRepository();
     public void outputExam(Long id){
         System.out.println(examCRUD.retrieve(id).get());
+        examCRUD.getSubExams(id).forEach(exam ->
+                                System.out.println("--->"+exam
+                                                         +gradeRepo.getGradeByExamId(exam.getId())
+                                                         +"\n"));
     }
 }
