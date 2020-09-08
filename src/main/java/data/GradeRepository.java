@@ -1,8 +1,6 @@
 package data;
 
-import model.Exam;
 import model.Grade;
-import model.Person;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,12 +8,14 @@ import java.util.List;
 import java.util.Optional;
 
 public class GradeRepository implements  CRUDOperations<Grade>{
-    public List<Grade> getGradeByExamId(Long id){
+
+    public List<String> getGradeByExamId(Long id){
         EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
-        return em.createQuery("SELECT g from Grade g WHERE g.exam.id=?1", Grade.class)
+         return em.createQuery("SELECT 'Grade id: '|| g.id ||', grade value: ' || g.gradeValue from Grade g WHERE g.exam.id=?1")
                 .setParameter(1, id)
                 .getResultList();
+
     }
 
     @Override

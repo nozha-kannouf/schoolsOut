@@ -14,11 +14,11 @@ public class Dee_1_App {
         ModuleRepository moduleCRUD = new ModuleRepository();
         ExamRepository examCRUD = new ExamRepository();
 
-        //createTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
+        createTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
 
         //retrieveTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
 
-        deleteTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
+        //deleteTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
 
         //updateTest(userCRUD,personCRUD,courseCRUD,moduleCRUD,examCRUD);
 
@@ -26,17 +26,15 @@ public class Dee_1_App {
 
     private static void updateTest(UserRepository userCRUD, PersonRepository personCRUD, CourseRepository courseCRUD, ModuleRepository moduleCRUD, ExamRepository examCRUD) {
         User user = User.builder().login("login17").passwordHash("passwordUpdated").active(true).build();
-       // Person person = Person.builder().id(12).familyName("lahriUpdated").gender(Gender.MALE).firstName("amineUpdated").course(course).build();
+        Person person = Person.builder().id(47).familyName("lahriUpdated").gender(Gender.MALE).firstName("amineUpdated")
+                            .courseActive(Course.builder().id(25L).build()).build();
         Module module2 = Module.builder().id(15L).build();
         Course course = Course.builder().id(19L).active(true).code("INFO248Updated").description("description course1 updated").imageURL("url to course1").name("Algorithme Updated").build();
         Module module1 = Module.builder().id(7L).description("module updated").course(course).build();
         Exam exam= Exam.builder().id(1L).module(module1).date(LocalDate.now()).description("description exam1 updated").name("exam1 updated").total(60).weight(30).build();
 
-
-
-
         //userCRUD.update(user);//ok
-        //personCRUD.update(person);//ok
+        personCRUD.update(person);//ok
         //courseCRUD.update(course);//ok
         //moduleCRUD.update(module1);//ok
         //examCRUD.update(exam);//ok
@@ -47,7 +45,7 @@ public class Dee_1_App {
 
         model.Module module1 = Module.builder().id(28L).course(course).description("xxxx").name("Securité Informatique").build();
 
-        Exam exam1= Exam.builder().id(8L).module(module1).date(LocalDate.now()).description("description exam1").name("exam1").total(60).weight(30).build();
+        Exam exam= Exam.builder().id(8L).module(module1).date(LocalDate.now()).description("description exam1").name("exam1").total(60).weight(30).build();
 
         Person person1 = Person.builder().id(18).courseActive(course).familyName("Geudens").firstName("Patrick").gender(Gender.MALE).build();
 
@@ -57,7 +55,7 @@ public class Dee_1_App {
         //personCRUD.delete(person1);//ok
         //moduleCRUD.delete(module1);// ok
         //courseCRUD.delete(course); // oK
-        examCRUD.delete(exam1);// OK
+        //examCRUD.delete(exam);// OK
 
     }
 
@@ -70,12 +68,23 @@ public class Dee_1_App {
         Course course2 = Course.builder().active(true).code("INFO56").description("description course2").imageURL("url to course2").name("Réseaux Informatique").build();
 
         model.Module module = Module.builder()
-                            .course(Course.builder().id(56L).build())
+                            .course(Course.builder().id(25L).build())
                             .description("description module 56")
-                            .name("module 2")
+                            .name("module 4")
                             .build();
 
-        Exam exam1= Exam.builder().module(module).date(LocalDate.now()).description("description exam1").name("exam1").total(60).weight(30).build();
+        Exam exam= Exam.builder().module(Module.builder().id(85L).build()).examGroup(Exam.builder().id(90L).build())
+                .date(LocalDate.now()).description("subExam1").name("subExam1").total(50).weight(10)
+                .build();
+        Exam exam1= Exam.builder().module(Module.builder().id(85L).build()).examGroup(Exam.builder().id(90L).build())
+                .date(LocalDate.now()).description("subExam2").name("subExam2").total(50).weight(10)
+                .build();
+        Exam exam2= Exam.builder().module(Module.builder().id(85L).build()).examGroup(Exam.builder().id(91L).build())
+                .date(LocalDate.now()).description("subExam1").name("subExam1").total(50).weight(10)
+                .build();
+        Exam exam3= Exam.builder().module(Module.builder().id(85L).build()).examGroup(Exam.builder().id(91L).build())
+                .date(LocalDate.now()).description("subExam2").name("subExam2").total(50).weight(10)
+                .build();
 
         Person person1 = Person.builder().familyName("Geudens").firstName("Patrick").gender(Gender.MALE).courseActive(course1).build();
 //        Person person2 = Person.builder().familyName("DS").firstName("Pearl").gender(Gender.FEMALE).courseActive(course2).build();
@@ -89,12 +98,21 @@ public class Dee_1_App {
 //                                                    course -> System.out.println("The course is registered..!"),
 //                                                    () -> System.err.println("Error: course could NOT be saved.."));
 //
-        moduleCRUD.create(module).ifPresentOrElse(
-                                                    mod -> System.out.println("The module is registered..!"),
-                                                    () -> System.err.println("Error: module could NOT be saved.."));
-//        examCRUD.create(exam1).ifPresentOrElse(
-//                                                exam -> System.out.println("The exam is registered..!"),
-//                                                () -> System.err.println("Error: exam could NOT be saved.."));
+//        moduleCRUD.create(module).ifPresentOrElse(
+//                                                    mod -> System.out.println("The module is registered..!"),
+//                                                    () -> System.err.println("Error: module could NOT be saved.."));
+        examCRUD.create(exam).ifPresentOrElse(
+                                                exam4 -> System.out.println("The exam is registered..!"),
+                                                () -> System.err.println("Error: exam could NOT be saved.."));
+        examCRUD.create(exam1).ifPresentOrElse(
+                exam4 -> System.out.println("The exam is registered..!"),
+                () -> System.err.println("Error: exam could NOT be saved.."));
+        examCRUD.create(exam2).ifPresentOrElse(
+                exam4 -> System.out.println("The exam is registered..!"),
+                () -> System.err.println("Error: exam could NOT be saved.."));
+        examCRUD.create(exam3).ifPresentOrElse(
+                exam4 -> System.out.println("The exam is registered..!"),
+                () -> System.err.println("Error: exam could NOT be saved.."));
 
 //        personCRUD.create(person1).ifPresentOrElse(
 //                                                    person -> System.out.println("The person is registered..!"),
@@ -114,8 +132,6 @@ public class Dee_1_App {
         userCRUD.retrieve("login190").ifPresentOrElse(
                                                             user -> System.out.println("The user : "+ user + ", exist in the DB"),
                                                             () -> System.err.println("Error: user is NOT found.."));
-
-
         personCRUD.retrieve(53).ifPresentOrElse(
                                                         person -> System.out.println("The person : "+ person + ", exist in the DB"),
                                                         () -> System.err.println("Error: person is NOT found.."));

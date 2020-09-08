@@ -4,11 +4,14 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
+//@Getter@Setter@RequiredArgsConstructor@EqualsAndHashCode
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder(toBuilder = true)
 @Entity
 @Table(name = "exam")
@@ -31,16 +34,70 @@ public class Exam {
 
     @ManyToOne(targetEntity = Exam.class,
             fetch = FetchType.EAGER,
-            cascade = {CascadeType.REMOVE, CascadeType.MERGE})
+            cascade = {CascadeType.MERGE})
     @JoinColumn(name = "examGroup_id", referencedColumnName = "id")
-    @ToString.Exclude
+    //@ToString.Exclude
     private Exam examGroup;
 
     @OneToMany(mappedBy = "examGroup",
             fetch = FetchType.EAGER,
             targetEntity = Exam.class,
             cascade = {CascadeType.REMOVE, CascadeType.MERGE})
-    @ToString.Exclude
     private List<Exam> subExams;
 
+    @Override
+    public String toString() {
+        String result= null;
+
+        if( module!= null && examGroup != null )
+        result= "Exam{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", date=" + date +
+                ", weight=" + weight +
+                ", total=" + total +
+                ", description='" + description + '\'' +
+                ", module= "+  module.getName() + "("+module.getId()+")"+
+                ", examGroup= " + examGroup.getName() + "("+examGroup.getId()+")"+
+                ", subExams=" + Arrays.asList(subExams.toArray()).stream().map(e->"\n--->"+e).collect(Collectors.toList())+
+                '}';
+
+        if( module== null && examGroup != null )
+        result = "Exam{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", date=" + date +
+                    ", weight=" + weight +
+                    ", total=" + total +
+                    ", description='" + description + '\'' +
+                    ", module= null" +
+                    ", examGroup=" + examGroup.getName() + "("+examGroup.getId()+")"+
+                    ", subExams=" + Arrays.asList(subExams.toArray()).stream().map(e->"\n--->"+e).collect(Collectors.toList())+
+                    '}';
+        if( module!= null && examGroup == null )
+            result = "Exam{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", date=" + date +
+                    ", weight=" + weight +
+                    ", total=" + total +
+                    ", description='" + description + '\'' +
+                    ", module= " + module.getName() + "("+module.getId()+")"+
+                    ", examGroup=null"+
+                    ", subExams=" + Arrays.asList(subExams.toArray()).stream().map(e->"\n--->"+e).collect(Collectors.toList())+
+                    '}';
+        if( module== null && examGroup == null )
+            result = "Exam{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", date=" + date +
+                    ", weight=" + weight +
+                    ", total=" + total +
+                    ", description='" + description + '\'' +
+                    ", module= null"+
+                    ", examGroup=null"+
+                    ", subExams=" + Arrays.asList(subExams.toArray()).stream().map(e->"\n--->"+e).collect(Collectors.toList())+
+                    '}';
+    return result;
+    }
 }

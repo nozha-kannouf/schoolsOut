@@ -1,6 +1,8 @@
 package data;
 
+import model.Course;
 import model.Exam;
+import model.Grade;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -28,6 +30,12 @@ public class ExamRepository implements CRUDOperations<Exam> {
 
     @Override
     public Optional<Exam> retrieve(Object identity) {
+        EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
+        EntityManager em = emf.createEntityManager();
+        Exam foundExam = em.find(Exam.class, identity);
+        return Optional.ofNullable(foundExam);
+    }
+    public Optional<Exam> retrieveExamWithGrade(Object identity) {
         EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         Exam foundExam = em.find(Exam.class, identity);
@@ -64,13 +72,16 @@ public class ExamRepository implements CRUDOperations<Exam> {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
-        Optional<Exam> examExists = retrieve(exam.getId(),em);
-
-        if(examExists.isPresent()){
-            em.createQuery("UPDATE Grade g SET g.exam = ?1 WHERE g.exam = ?2")
+        if(em.find(Exam.class, exam.getId())!= null){
+            em.createQuery("UPDATE Grade g SET g.exam = ?1 WHERE g.exam.id = ?2")
                     .setParameter(1, null)
-                    .setParameter(2, exam)
+                    .setParameter(2, exam.getId())
                     .executeUpdate();
+            em.createQuery("UPDATE Exam e SET e.examGroup.id = ?1 WHERE e.id = ?2")
+                    .setParameter(1, null)
+                    .setParameter(2, exam.getId())
+                    .executeUpdate();
+
             em.remove(em.find(Exam.class, exam.getId()));
 
             em.getTransaction().commit();
